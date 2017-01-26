@@ -1,19 +1,23 @@
 var SpectacleWindowSizeAdjuster = (function () {
-    var resizeWindowRect = function(windowRect, visibleFrameOfDestinationScreen, sizeOffset) {
+    var resizeWindowRect = function(windowRect, visibleFrameOfDestinationScreen, sizeOffset, stickToEdges) {
         var resizedWindowRect = SpectacleCalculationHelpers.copyRect(windowRect);
         resizedWindowRect.width = resizedWindowRect.width + sizeOffset;
         resizedWindowRect.x = resizedWindowRect.x - Math.floor(sizeOffset / 2.0);
-        resizedWindowRect = adjustedWindowRectAgainstLeftAndRightEdgesOfScreen(windowRect,
-                                                                               resizedWindowRect,
-                                                                               visibleFrameOfDestinationScreen);
+        if (stickToEdges) {
+        	resizedWindowRect = adjustedWindowRectAgainstLeftAndRightEdgesOfScreen(windowRect,
+                                                                                   resizedWindowRect,
+                                                                                   visibleFrameOfDestinationScreen);
+        }
         if (resizedWindowRect.width >= visibleFrameOfDestinationScreen.width) {
             resizedWindowRect.width = visibleFrameOfDestinationScreen.width;
         }
         resizedWindowRect.height = resizedWindowRect.height + sizeOffset;
         resizedWindowRect.y = resizedWindowRect.y - Math.floor(sizeOffset / 2.0);
-        resizedWindowRect = adjustedWindowRectAgainstTopAndBottomEdgesOfScreen(windowRect,
-                                                                               resizedWindowRect,
-                                                                               visibleFrameOfDestinationScreen);
+		if (stickToEdges) {
+        	resizedWindowRect = adjustedWindowRectAgainstTopAndBottomEdgesOfScreen(windowRect,
+                                                                                   resizedWindowRect,
+                                                                                   visibleFrameOfDestinationScreen);
+		}
         if (resizedWindowRect.height >= visibleFrameOfDestinationScreen.height) {
             resizedWindowRect.height = visibleFrameOfDestinationScreen.height;
             resizedWindowRect.y = windowRect.y;
