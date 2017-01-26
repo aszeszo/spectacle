@@ -1,3 +1,3 @@
 windowPositionCalculationRegistry.registerWindowPositionCalculationWithAction(function (windowRect, visibleFrameOfSourceScreen, visibleFrameOfDestinationScreen) {
-    return SpectacleWindowSizeAdjuster.resizeWindowRect(windowRect, visibleFrameOfDestinationScreen, -30.0, true);
+    return SpectacleWindowSizeAdjuster.resizeWindowRect(windowRect, visibleFrameOfDestinationScreen, -30.0, false);
 }, "SpectacleWindowActionSmaller");
